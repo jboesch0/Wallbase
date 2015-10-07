@@ -15,6 +15,7 @@
                 <?php
                 if($logged) {
                     ?>
+                    <li><a href="<?php echo base_url(); ?>index.php/DropzoneController">Upload</a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/UserController"><?php echo $username ?></a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/HomeController/logout">Deconnexion</a></li>
                     <?php
