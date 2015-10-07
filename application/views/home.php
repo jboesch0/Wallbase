@@ -3,7 +3,7 @@
     <div class="jumbotron">
         <h1>Bienvenue sur Wallbase</h1>
         <p>
-            Wallbase est de site de partage ou il est possible de visioner les plus belles images ou photos
+            Wallbase est de site de partage ou il est possible de visioner les plus belles images ou photos.
         </p>
     </div>
 </div>
