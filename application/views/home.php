@@ -3,8 +3,14 @@
     <div class="jumbotron">
         <h1>Bienvenue sur Wallbase</h1>
         <p>
-            Wallbase est de site de partage ou il est possible de visioner les plus belles images ou photos.
+            Wallbase est de site de partage ou il est possible de visioner les plus belles images ou photos
         </p>
+        <?php
+        for($i=0; $i< sizeof($wallpapers); $i++){
+            ?>
+            <img src="<?php echo base_url();?>assets/wallpaper/miniatures/<?php echo $wallpapers[$i]->titre;?>" alt=""/><?php
+        }
+        ?>
     </div>
 </div>
 <script type="text/javascript">
@@ -26,7 +32,6 @@
                                 $('<a>').attr('href', '<?php echo base_url() ?>index.php/UserController').append(
                                     $('<span>').attr('id', 'deco').append(res['username'])
                                 )));
-
                         $('#right-nav').append(
                             $('<li>').append(
                                 $('<a>').attr('href', '<?php echo base_url(); ?>index.php/HomeController/logout').append(
@@ -37,7 +42,6 @@
                         html += 'Bonjour ' + res['username'] + ', vous êtes maintenant connecté';
                         html += '</div>';
                         $(html).hide().prependTo('#connectedUsername').slideDown();
-
                         $('.page-alert .close').click(function (e) {
                             e.preventDefault();
                             $(this).closest('.page-alert').slideUp();
