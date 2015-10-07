@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/~Jerome/projet/';
+$config['base_url'] = 'http://localhost:8888/wallbase/';
 
 /*
 |--------------------------------------------------------------------------

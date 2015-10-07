@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> 'mysql:host=localhost;dbname=wallbase',
-	'hostname' => 'localhost',
+	'hostname' => '',
 	'username' => 'root',
-	'password' => '',
+	'password' => 'root',
 	'database' => '',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',

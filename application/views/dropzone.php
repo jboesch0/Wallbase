@@ -16,9 +16,13 @@
 		</script>
 	</head>
 	<body>
-		<h1>File Upload using dropzone.js and Codeigniter - arjun.net.in</h1>
-		<form action="<?php echo site_url('DropzoneController/upload');?>" class="dropzone" >
+    <div class="container">
+        <h1>Déposez vos photos</h1>
+        <hr>
+        <form action="<?php echo site_url('DropzoneController/upload');?>" class="dropzone" >
 
-		</form>
+        </form>
+    </div>
+
 	</body>
 </html>
