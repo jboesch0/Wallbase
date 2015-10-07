@@ -11,6 +11,10 @@ class HomeController extends CI_Controller
 
     public function index()
     {
+
+        $this->load->model('HomeModel');
+        $data['wallpapers']=$this->HomeModel->lastWallpapers();
+
         $this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
         $data['username'] = $this->session->userdata('username');
@@ -20,6 +24,8 @@ class HomeController extends CI_Controller
         $this->load->view('modals/inscription_modal');
         $this->load->view('home', $data);
         $this->load->view('partials/footer');
+
+        
     }
 
     public function register(){
@@ -32,6 +38,7 @@ class HomeController extends CI_Controller
         $this->load->model('user');
         $username = $this->input->post('Jname');
         $password = $this->input->post('Jpassword');
+        var_dump($username.'/'.$password);
         $return = $this->user->login($username, $password);
 
         if($return){

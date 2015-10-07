@@ -41,7 +41,7 @@ class DropzoneController extends CI_Controller
 				$config = array(
 					'image_library'=>'GD2',
 					'source_image'=> getcwd() . '/assets/wallpaper/'.$fileName,
-					'new_image'=> 'miniatures/'.$fileName,
+					'new_image'=> getcwd() . '/assets/wallpaper/miniatures',
 					'creat_thumb'=>true,
 					'thum_marker'=>'',
 					'maintain_ratio'=>true,
