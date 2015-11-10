@@ -6,13 +6,20 @@
             Wallbase est de site de partage ou il est possible de visioner les plus belles images ou photos
         </p>
         <?php
-        for($i=0; $i< sizeof($wallpapers); $i++){
+         for($i=0; $i< sizeof($wallpapers); $i++){
             ?>
-            <img src="<?php echo base_url();?>assets/wallpaper/miniatures/<?php echo $wallpapers[$i]->titre;?>" alt=""/><?php
+            <figure>
+            <a href="<?php echo base_url();?>assets/wallpaper/<?php echo $wallpapers[$i]->titre;?>" class="zoombox"><img src="<?php echo base_url();?>assets/wallpaper/miniatures/<?php echo $wallpapers[$i]->titre;?>" alt="" /></a>
+            <figcaption><?php echo $wallpapers[$i]->titre;?></figcaption>
+            </figure><?php
         }
+        
+
         ?>
+
     </div>
 </div>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $("#btn-login").click(function () {
@@ -51,4 +58,24 @@
             });
         });
     });
+
+
+
+function keyWord(word){
+    $.ajax({
+        type: "POST",
+        url: "<?php base_url();?>"+ "index.php/HomeController/keyWord",
+        dataType: "json",
+        data: word,
+        success: function(res){
+            if(res){
+                /*$("#searchInput").append("div");
+                res.each(function(index){
+                    $("#searchInput div").append("<span class='options'>"+res[index]+"</span>");
+                });*/
+                
+            }
+        }
+    })
+}
 </script>
