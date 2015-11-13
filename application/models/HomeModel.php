@@ -14,6 +14,8 @@ class HomeModel extends CI_Model
 		$sql = "SELECT * from wallpaper order by id_wallpaper desc limit 10";
 
 		$res = $this->db->query($sql);
+		/*var_dump($res);
+        exit();*/
 		return $res->result();
 
 		

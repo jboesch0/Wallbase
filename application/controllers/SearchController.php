@@ -18,6 +18,9 @@ class SearchController extends CI_Controller
         $this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
         $data['username'] = $this->session->userdata('username');
+
+        $this->load->model('HomeModel');
+        $data['tags']=$this->HomeModel->someTags();
         /*$data['wallpaper'] = $search;
         var_dump($data['wallpaper']);
             exit;*/
@@ -25,6 +28,7 @@ class SearchController extends CI_Controller
         $this->load->view('partials/navbar', $data);
         $this->load->view('modals/connexion_modal');
         $this->load->view('modals/inscription_modal');
+        $this->load->view('partials/tagbar', $data);
         $this->load->view('search', $data);
         $this->load->view('partials/footer');
 

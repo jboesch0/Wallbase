@@ -10,7 +10,7 @@
             ?>
             <figure>
             <a href="<?php echo base_url();?>assets/wallpaper/<?php echo $wallpapers[$i]->titre;?>" class="zoombox"><img src="<?php echo base_url();?>assets/wallpaper/miniatures/<?php echo $wallpapers[$i]->titre;?>" alt="" /></a>
-            <figcaption><?php echo $wallpapers[$i]->titre;?></figcaption>
+            <figcaption><a href="<?php echo base_url();?>index.php/C_img?img_id=<?php echo $wallpapers[$i]->id_wallpaper;?>"><?php echo $wallpapers[$i]->titre;?></a></figcaption>
             </figure><?php
         }
         

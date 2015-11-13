@@ -40,7 +40,7 @@ class HomeController extends CI_Controller
         $this->load->model('user');
         $username = $this->input->post('Jname');
         $password = $this->input->post('Jpassword');
-        var_dump($username.'/'.$password);
+        //var_dump($username.'/'.$password);
         $return = $this->user->login($username, $password);
 
         if($return){
