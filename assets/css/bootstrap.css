@@ -6910,25 +6910,3 @@ button.close {
     }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-#recherche{
-    display: inline;
-    position: absolute;
-    top: -10%;
-}
-#recherche form{
-    display: inline;
-}
-.tags{
-    position: absolute;
-    width: 14%;
-    float: left;
-    top: 9%;
-}
-figure{
-    display: inline-block;
-    width: 200px;
-}
-figcaption{
-    position: relative;
-    text-align: center;
-}

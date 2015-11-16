@@ -14,7 +14,6 @@ class HomeController extends CI_Controller
 
         $this->load->model('HomeModel');
         $data['wallpapers']=$this->HomeModel->lastWallpapers();
-        $data['tags']=$this->HomeModel->someTags();
 
         $this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
@@ -23,7 +22,6 @@ class HomeController extends CI_Controller
         $this->load->view('partials/navbar', $data);
         $this->load->view('modals/connexion_modal');
         $this->load->view('modals/inscription_modal');
-        $this->load->view('partials/tagbar', $data);
         $this->load->view('home', $data);
         $this->load->view('partials/footer');
 
@@ -64,21 +62,6 @@ class HomeController extends CI_Controller
         exit;
     }
 
-    public function keyWord(){
-        $word = $this->input->post('word');
-        $this->load->model('HomeModel');
-        $res = $this->HomeModel->keyWord($word);
-        if($res){
-            //echo json_encode($res);
-            $this->load->view('home', $res);
-            return true;
-        }
-        else{
-            echo "Il y a un problème";
-        }
-    }
-
-    
 
 
 }
