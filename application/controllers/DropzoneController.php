@@ -10,11 +10,11 @@ class DropzoneController extends CI_Controller
 {
 
 
-	 
+
 	public function index() {
 		$this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
-        $data['username'] = $this->session->userdata('username');
+        $data['pseudo'] = $this->session->userdata('pseudo');
         $this->load->view('partials/header');
         $this->load->view('partials/navbar', $data);
         $this->load->view('modals/connexion_modal');
@@ -22,12 +22,12 @@ class DropzoneController extends CI_Controller
         $this->load->view('dropzone', $data);
         $this->load->view('partials/footer');
 	}
-		
+
 
 	public function upload() {
 
 		if (!empty($_FILES)) {
-        	$data = $this->session->userdata('idusers');
+        	$data = $this->session->userdata('id');
 			$this->load->model('DropzoneModel');
 			$tempFile = $_FILES['file']['tmp_name'];
 			$fileName = $_FILES['file']['name'];
@@ -51,8 +51,7 @@ class DropzoneController extends CI_Controller
 				$this->load->library('image_lib',$config);
 				$this->image_lib->resize();
 			}
-				
+
 		}
 	}
 }
-	 

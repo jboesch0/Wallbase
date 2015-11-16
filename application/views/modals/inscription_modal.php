@@ -18,33 +18,38 @@
                     <div class="form-group">
                         <label for="email" class="col-md-3 control-label">Email</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="email" placeholder="Email">
+                            <input type="text" class="form-control" id="email" placeholder="Email">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label for="firstname" class="col-md-3 control-label">Pseudo</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="pseudo" placeholder="Pseudo">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="firstname" class="col-md-3 control-label">Nom</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="firstname" placeholder="Nom">
+                            <input type="text" class="form-control" id="nom" placeholder="Nom">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="col-md-3 control-label">Prenom</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" name="lastname" placeholder="Prenom">
+                            <input type="text" class="form-control" id="prenom" placeholder="Prenom">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="password" class="col-md-3 control-label">Mot de passe</label>
                         <div class="col-md-9">
-                            <input type="password" class="form-control" name="passwd" placeholder="Mot de passe">
+                            <input type="password" class="form-control" id="mdp" placeholder="Mot de passe">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <!-- Button -->
                         <div class="col-md-offset-3 col-md-9">
-                            <button id="btn-signup" type="button" class="btn btn-success"><i class="icon-hand-right"></i>S'inscrire</button>
+                            <button id="btn-inscription" type="button" class="btn btn-success"><i class="icon-hand-right"></i>S'inscrire</button>
                         </div>
                     </div>
                 </form>
@@ -57,3 +62,4 @@
 
     </div>
 </div>
+

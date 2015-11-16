@@ -22,12 +22,14 @@
                 if($logged) {
                     ?>
                     <li><a href="<?php echo base_url(); ?>index.php/DropzoneController">Upload</a></li>
-                    <li><a href="<?php echo base_url(); ?>index.php/UserController"><?php echo $username ?></a></li>
+                    <li><a href="<?php echo base_url(); ?>index.php/UserController"><?php echo $pseudo ?></a></li>
                     <li><a href="<?php echo base_url(); ?>index.php/HomeController/logout">Deconnexion</a></li>
+
                     <?php
                 } else {
                     ?>
                     <li><a href="" data-toggle="modal" data-target="#connexion" id="navConnexion">Connexion</a></li>
+                    <li><a href="" data-toggle="modal" data-target="#inscription" id="navInscription">Inscription</a></li>
                     <?php
                 }
                 ?>

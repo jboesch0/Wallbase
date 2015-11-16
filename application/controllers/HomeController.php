@@ -14,11 +14,21 @@ class HomeController extends CI_Controller
 
         $this->load->model('HomeModel');
         $data['wallpapers']=$this->HomeModel->lastWallpapers();
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
         $data['tags']=$this->HomeModel->someTags();
 
+>>>>>>> origin/master
         $this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
-        $data['username'] = $this->session->userdata('username');
+        if ($data['logged']) {
+          $id = $this->session->userdata('id');
+          $infosUser = $this->user->getInfos($id);
+          $data['pseudo'] = $infosUser->pseudo;
+        }
         $this->load->view('partials/header');
         $this->load->view('partials/navbar', $data);
         $this->load->view('modals/connexion_modal');
@@ -27,12 +37,30 @@ class HomeController extends CI_Controller
         $this->load->view('home', $data);
         $this->load->view('partials/footer');
 
-        
+
     }
 
     public function register(){
-        $this->load->library('form_validation');
+        $email = $this->input->post('Jemail');
+        $pseudo = $this->input->post('Jpseudo');
+        $nom = $this->input->post('Jnom');
+        $prenom = $this->input->post('Jprenom');
+        $mdp = $this->input->post('Jmdp');
 
+        if (isset($email) && !(empty($email))
+            && isset($pseudo) && !(empty($pseudo))
+            && isset($nom) && !(empty($nom))
+            && isset($prenom) && !(empty($prenom))
+            && isset($mdp) && !(empty($mdp))){
+
+            $this->load->model('user');
+            $this->user->addUser($email, $pseudo, $nom, $prenom, $mdp);
+            echo json_encode(array('pseudo' => $pseudo));
+            return true;
+        } else {
+            echo json_encode(array('errChamps' => "Les champs n'ont pas été bien remplis"));
+            return false;
+        }
     }
 
     public function login()
@@ -40,22 +68,21 @@ class HomeController extends CI_Controller
         $this->load->model('user');
         $username = $this->input->post('Jname');
         $password = $this->input->post('Jpassword');
-        var_dump($username.'/'.$password);
         $return = $this->user->login($username, $password);
 
         if($return){
             $data = array(
                 'return' => true,
-                'username' => $return->username,
+                'id' => $return->idusers,
+                'pseudo' => $return->pseudo,
                 'logged_in' => true
             );
             $this->session->set_userdata($data);
             echo (json_encode($data));
             return true;
         }else {
-            echo "Il y a eu un problème";
+            return false;
         }
-
     }
 
     public function logout(){
