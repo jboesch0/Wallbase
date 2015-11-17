@@ -14,7 +14,7 @@
                     
                     $.each(res.comments, function(i, val){
                         //alert(val.pseudo);
-                        $("#commentBox").append("<pre id='"+val.id_comment+"'><a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier   </a><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span>"+val.comment+"</span></pre>");
+                        $("#commentBox").append("<pre id='"+val.id_comment+"'><a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier</a><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span>"+val.comment+"</span></pre>");
                     });
                     //$("#comment").val("");
                     
@@ -80,7 +80,7 @@ function modifComment(idComment){
                     
             $.each(res.comments, function(i, val){
                 //alert(val.pseudo);
-                $("#commentBox").append("<pre id='"+val.id_comment+"'><a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier   </a><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span>"+val.comment+"</span></pre>");
+                $("#commentBox").append("<pre id='"+val.id_comment+"'><a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier</a><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span>"+val.comment+"</span></pre>");
             });
            
         }
@@ -118,7 +118,7 @@ function deleteComment(idComment){
                 <?php
                 for($i=0; $i < sizeof($comments); $i++){
                     ?>
-                    <pre id="<?php echo $comments[$i]->id_comment;?>"><a href="javascript:void(0)" class="modifSupprComment" onclick="deleteComment(<?php echo $comments[$i]->id_comment;?>)">supprimer</a><a href="javascript:void(0)" class="modifSupprComment" onclick="inputModif(<?php echo $comments[$i]->id_comment;?>)">modifier   </a><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><span><?php echo $comments[$i]->comment;?></span></pre><?php
+                    <pre id="<?php echo $comments[$i]->id_comment;?>"><a href="javascript:void(0)" class="modifSupprComment" onclick="deleteComment(<?php echo $comments[$i]->id_comment;?>)">supprimer</a><a href="javascript:void(0)" class="modifSupprComment" onclick="inputModif(<?php echo $comments[$i]->id_comment;?>)">modifier</a><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><span><?php echo $comments[$i]->comment;?></span></pre><?php
                 }
                 ?>
             </div>
