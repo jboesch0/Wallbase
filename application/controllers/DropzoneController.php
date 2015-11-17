@@ -9,12 +9,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class DropzoneController extends CI_Controller
 {
 
-
-
 	public function index() {
 		$this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
-        $data['pseudo'] = $this->session->userdata('pseudo');
+        $data['username'] = $this->session->userdata('username');
         $this->load->view('partials/header');
         $this->load->view('partials/navbar', $data);
         $this->load->view('modals/connexion_modal');
@@ -23,31 +21,25 @@ class DropzoneController extends CI_Controller
         $this->load->view('partials/footer');
 	}
 
-
 	public function upload() {
-
 		if (!empty($_FILES)) {
-        	$data = $this->session->userdata('id');
+        	$data = $this->session->userdata('idusers');
 			$this->load->model('DropzoneModel');
 			$tempFile = $_FILES['file']['tmp_name'];
 			$fileName = $_FILES['file']['name'];
-
     		if($this->DropzoneModel->insertWallpaper($fileName, $data)){
-
-
 				$targetPath = getcwd() . '/assets/wallpaper/';
 				$targetFile = $targetPath . $fileName ;
 				move_uploaded_file($tempFile, $targetFile);
 				$config = array(
 					'image_library'=>'GD2',
 					'source_image'=> getcwd() . '/assets/wallpaper/'.$fileName,
-					'new_image'=> './assets/wallpaper/miniatures',
+					'new_image'=> getcwd() . '/assets/wallpaper/miniatures',
 					'creat_thumb'=>true,
 					'thum_marker'=>'',
 					'maintain_ratio'=>false,
 					'width'=>200,
 					'height'=>150);
-
 				$this->load->library('image_lib',$config);
 				$this->image_lib->resize();
 			}

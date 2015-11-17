@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class HomeModel extends CI_Model
 {
 	public function lastWallpapers(){
-		$sql = "SELECT * from wallpaper order by idwallpaper desc limit 10";
+		$sql = "SELECT * from wallpaper order by id_wallpaper desc limit 10";
 		$res = $this->db->query($sql);
 		return $res->result();
 }

@@ -13,7 +13,7 @@
             }
     ?>
               <div class="col-md-3">
-                <img src="<?php echo base_url();?>assets/wallpaper/miniatures/<?php echo $i->titre;?>" id="test"/>
+                <img src="<?php echo base_url();?>assets/wallpaper/miniatures/<?php echo $i->titre.".".$i->extension;?>"/>
               </div>
 
     <?php
