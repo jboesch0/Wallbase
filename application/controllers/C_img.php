@@ -44,9 +44,15 @@ class C_img extends CI_Controller
         $result = $this->M_img->postComment($comment, $id_wallpaper);
         //var_dump($result);
         if($result){
-            return $result;
+            //var_dump($result);
+            $allComment['comments']=$this->M_img->getComments($id_wallpaper);
+            //var_dump($allComment);
+            $allComment = json_decode(json_encode($allComment), true);
+            echo json_encode($allComment);
+            return true;
         }
         else{
+            var_dump("lol");
             return false;
         }
     }

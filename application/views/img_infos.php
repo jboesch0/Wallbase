@@ -9,11 +9,15 @@
                 dataType: "json",
                 data: {Jcomment: comment,Jimg: num_img},
                 success: function (res) {
-                    console.log("lol");
+                    //console.log(res["comments"]);
+                    $("#commentBox").html("");
+                    
+                    $.each(res.comments, function(i, val){
+                        //alert(val.pseudo);
+                        $("#commentBox").append("<pre><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br />"+val.comment+"</pre>");
+                    });
                     //$("#comment").val("");
-                    if(res){
-                        $("#comment").val("");
-                    }
+                    
 
                 }
             });
@@ -66,13 +70,14 @@
 
                 <img src="<?php echo base_url();?>assets/wallpaper/<?php echo $img_infos[0]->titre.'.'.$img_infos[0]->extension;?>" width="500px" heigth="500px" alt="" style="margin-bottom:2%;">
             </div>
-
-            <?php
-            for($i=0; $i < sizeof($comments); $i++){
+            <div id="commentBox">
+                <?php
+                for($i=0; $i < sizeof($comments); $i++){
+                    ?>
+                    <pre><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><?php echo $comments[$i]->comment;?></pre><?php
+                }
                 ?>
-                <pre><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><?php echo $comments[$i]->comment;?></pre><?php
-            }
-            ?>
+            </div>
         </div>
     </div>
 

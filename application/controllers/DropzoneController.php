@@ -23,7 +23,7 @@ class DropzoneController extends CI_Controller
 
 	public function upload() {
 		if (!empty($_FILES)) {
-        	$data = $this->session->userdata('idusers');
+        	$data = $this->session->userdata('id');
 			$this->load->model('DropzoneModel');
 			$tempFile = $_FILES['file']['tmp_name'];
 			$fileName = $_FILES['file']['name'];
