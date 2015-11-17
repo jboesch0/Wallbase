@@ -12,7 +12,7 @@ class DropzoneController extends CI_Controller
 	public function index() {
 		$this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
-        $data['username'] = $this->session->userdata('username');
+        $data['pseudo'] = $this->session->userdata('pseudo');
         $this->load->view('partials/header');
         $this->load->view('partials/navbar', $data);
         $this->load->view('modals/connexion_modal');
