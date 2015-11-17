@@ -56,4 +56,29 @@ class M_img extends CI_Model
         }
         return $res;
     }
+
+    public function supprComment($idComment){
+
+        $sql = "DELETE FROM comment WHERE id_comment = ".$idComment."";
+
+        if($this->db->query($sql)){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public function modifComment($idComment, $comment){
+
+        $sql="UPDATE comment SET comment = '".$comment."' WHERE id_comment = ".$idComment."";
+
+        if($this->db->query($sql)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 }

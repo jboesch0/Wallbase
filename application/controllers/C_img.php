@@ -52,7 +52,42 @@ class C_img extends CI_Controller
             return true;
         }
         else{
-            var_dump("lol");
+            return false;
+        }
+    }
+
+
+    public function supprComment(){
+        $idComment = $this->input->post("JidComment");
+
+        $this->load->model("M_img");
+
+        if($this->M_img->supprComment($idComment)){
+            json_encode(true);
+        }
+        else{
+            json_encode(false);
+        }
+    }
+
+    public function modifComment(){
+        $idComment = $this->input->post("JidComment");
+        $comment = $this->input->post("Jcomment");
+        $id_wallpaper = $this->input->post("Jid_wallpaper");
+        /*var_dump($id_wallpaper);
+        exit();*/
+
+        $this->load->model("M_img");
+        $result = $this->M_img->modifComment($idComment, $comment);
+
+        if($result){
+            $allComment['comments']=$this->M_img->getComments($id_wallpaper);
+
+            $allComment = json_decode(json_encode($allComment), true);
+            echo json_encode($allComment);
+            return true;
+        }
+        else{
             return false;
         }
     }

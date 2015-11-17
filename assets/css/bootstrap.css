@@ -6928,3 +6928,6 @@ figcaption{
     position: relative;
     text-align: center;
 }
+.modifSupprComment{
+    float: right;
+}

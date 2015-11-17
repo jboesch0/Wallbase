@@ -14,7 +14,7 @@
                     
                     $.each(res.comments, function(i, val){
                         //alert(val.pseudo);
-                        $("#commentBox").append("<pre><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br />"+val.comment+"</pre>");
+                        $("#commentBox").append("<pre id='"+val.id_comment+"'><a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier   </a><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span>"+val.comment+"</span></pre>");
                     });
                     //$("#comment").val("");
                     
@@ -60,6 +60,50 @@
             });
         });
     });
+
+function inputModif(idComment){
+
+    $("#"+idComment+" span").html('<textarea class="form-control text-area-comment" rows="3" id="comment" placeholder="Laisser un commentaire..."></textarea><input type="button" class="btn btn-default" value="valider" onclick="modifComment('+idComment+')"/>');
+}
+
+function modifComment(idComment){
+    comment = $("#"+idComment+" textarea").val();
+    img_id=<?php echo $_GET["img_id"];?>;
+    $.ajax({
+        type: "POST",
+        url: "<?php base_url(); ?>" + "C_img/modifComment",
+        dataType: "json",
+        data: {JidComment: idComment, Jcomment: comment,Jid_wallpaper: img_id},
+        success: function (res) {
+
+            $("#commentBox").html("");
+                    
+            $.each(res.comments, function(i, val){
+                //alert(val.pseudo);
+                $("#commentBox").append("<pre id='"+val.id_comment+"'><a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier   </a><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span>"+val.comment+"</span></pre>");
+            });
+           
+        }
+    });
+
+}
+
+
+function deleteComment(idComment){
+    //alert("lol");
+    $.ajax({
+        type: "POST",
+        url: "<?php base_url(); ?>" + "C_img/supprComment",
+        dataType: "text",
+        data: {JidComment: idComment},
+        success: function (res) {
+            //alert(idComment);
+            $("#"+idComment).remove();
+           
+        }
+    });
+
+}
 </script>
 <div class="container">
     <div class="row">
@@ -74,7 +118,7 @@
                 <?php
                 for($i=0; $i < sizeof($comments); $i++){
                     ?>
-                    <pre><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><?php echo $comments[$i]->comment;?></pre><?php
+                    <pre id="<?php echo $comments[$i]->id_comment;?>"><a href="javascript:void(0)" class="modifSupprComment" onclick="deleteComment(<?php echo $comments[$i]->id_comment;?>)">supprimer</a><a href="javascript:void(0)" class="modifSupprComment" onclick="inputModif(<?php echo $comments[$i]->id_comment;?>)">modifier   </a><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><span><?php echo $comments[$i]->comment;?></span></pre><?php
                 }
                 ?>
             </div>
