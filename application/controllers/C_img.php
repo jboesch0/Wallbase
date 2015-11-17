@@ -22,6 +22,11 @@ class C_img extends CI_Controller
         $this->load->model('HomeModel');
         $data['tags']=$this->HomeModel->someTags();
 
+        $this->load->model('M_img');
+        $data['comments']=$this->M_img->getComments($id_img);
+        /*var_dump($data["comments"]);
+        exit();*/
+
         $this->load->view('partials/header');
         $this->load->view('partials/navbar', $data);
         $this->load->view('modals/connexion_modal');
@@ -35,10 +40,13 @@ class C_img extends CI_Controller
     public function postComment(){
 
         $this->load->model('M_img');
-        $comment = $this->input->post("comment");
+        $comment = $this->input->post("Jcomment");
+        $id_wallpaper = $this->input->post("Jimg");
+        /*var_dump(date('Y-m-j h:i:s'));
+        exit();*/
 
-        $result = $this->M_img->postComment($comment);
-
+        $result = $this->M_img->postComment($comment, $id_wallpaper);
+        //var_dump($result);
         if($result){
             return $result;
         }

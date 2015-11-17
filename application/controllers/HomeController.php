@@ -46,6 +46,7 @@ class HomeController extends CI_Controller
         if($return){
             $data = array(
                 'return' => true,
+                'id'=> $return->idusers,
                 'username' => $return->username,
                 'logged_in' => true
             );

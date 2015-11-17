@@ -1,5 +1,6 @@
-<div class="container tags">
+<div class="container tags col-md-2">
     <div class="jumbotron">
+    	<h2>Tags</h2>
         <?php
         for($i=0; $i< sizeof($tags); $i++){
         ?>

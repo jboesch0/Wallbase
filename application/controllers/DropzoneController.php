@@ -44,9 +44,9 @@ class DropzoneController extends CI_Controller
 					'new_image'=> getcwd() . '/assets/wallpaper/miniatures',
 					'creat_thumb'=>true,
 					'thum_marker'=>'',
-					'maintain_ratio'=>true,
+					'maintain_ratio'=>false,
 					'width'=>200,
-					'height'=>200);
+					'height'=>150);
 
 				$this->load->library('image_lib',$config);
 				$this->image_lib->resize();

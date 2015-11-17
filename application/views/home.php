@@ -1,22 +1,24 @@
 <div class="container">
-    <div id="connectedUsername"></div>
-    <div class="jumbotron">
-        <h1>Bienvenue sur Wallbase</h1>
-        <p>
-            Wallbase est de site de partage ou il est possible de visioner les plus belles images ou photos
-        </p>
-        <?php
-         for($i=0; $i< sizeof($wallpapers); $i++){
+    <div class="row">
+        <div id="connectedUsername"></div>
+        <div class="jumbotron col-md-10">
+            <h1>Bienvenue sur Wallbase</h1>
+            <p>
+                Wallbase est de site de partage ou il est possible de visioner les plus belles images ou photos
+            </p>
+            <?php
+             for($i=0; $i< sizeof($wallpapers); $i++){
+                ?>
+                <figure>
+                <a href="<?php echo base_url();?>assets/wallpaper/<?php echo $wallpapers[$i]->titre.'.'.$wallpapers[$i]->extension;?>" class="zoombox"><img src="<?php echo base_url();?>assets/wallpaper/miniatures/<?php echo $wallpapers[$i]->titre.'.'.$wallpapers[$i]->extension;?>" width="200px" height="150px" alt="" /></a>
+                <figcaption><a href="<?php echo base_url();?>index.php/C_img?img_id=<?php echo $wallpapers[$i]->id_wallpaper;?>"><?php echo $wallpapers[$i]->titre;?></a></figcaption>
+                </figure><?php
+            }
+            
+
             ?>
-            <figure>
-            <a href="<?php echo base_url();?>assets/wallpaper/<?php echo $wallpapers[$i]->titre;?>" class="zoombox"><img src="<?php echo base_url();?>assets/wallpaper/miniatures/<?php echo $wallpapers[$i]->titre;?>" alt="" /></a>
-            <figcaption><a href="<?php echo base_url();?>index.php/C_img?img_id=<?php echo $wallpapers[$i]->id_wallpaper;?>"><?php echo $wallpapers[$i]->titre;?></a></figcaption>
-            </figure><?php
-        }
-        
 
-        ?>
-
+        </div>
     </div>
 </div>
 
