@@ -12,9 +12,6 @@ class SearchController extends CI_Controller
     public function index($search = null)
     {
 
-        
-        
-
         $this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
         $data['username'] = $this->session->userdata('username');
@@ -28,7 +25,7 @@ class SearchController extends CI_Controller
         $this->load->view('search', $data);
         $this->load->view('partials/footer');
 
-        
+
     }
 
     public function recherche(){
@@ -44,6 +41,12 @@ class SearchController extends CI_Controller
             //var_dump($res);
             $this->load->model('user');
             $data['logged'] = $this->user->isLoggedIn();
+            if ($data['logged']) {
+              $id = $this->session->userdata('id');
+              $infosUser = $this->user->getInfos($id);
+              $data['pseudo'] = $infosUser->pseudo;
+            }
+            $data['logged'] = $this->user->isLoggedIn();
             $data['username'] = $this->session->userdata('username');
             $this->load->view('partials/header');
             $this->load->view('partials/navbar', $data);
@@ -52,12 +55,9 @@ class SearchController extends CI_Controller
             $this->load->view('partials/tagbar', $data);
             $this->load->view('search', $data);
             $this->load->view('partials/footer');
-            
-
-            
         }
         else{
-            echo "Il y a un problème";
+            show_404();
         }
 
     }
@@ -78,6 +78,12 @@ class SearchController extends CI_Controller
 
             $this->load->model('user');
             $data['logged'] = $this->user->isLoggedIn();
+            if ($data['logged']) {
+              $id = $this->session->userdata('id');
+              $infosUser = $this->user->getInfos($id);
+              $data['pseudo'] = $infosUser->pseudo;
+            }
+            $data['logged'] = $this->user->isLoggedIn();
             $data['username'] = $this->session->userdata('username');
             $this->load->view('partials/header');
             $this->load->view('partials/navbar', $data);
@@ -86,12 +92,12 @@ class SearchController extends CI_Controller
             $this->load->view('partials/tagbar', $data);
             $this->load->view('search', $data);
             $this->load->view('partials/footer');
-            
 
-            
+
+
         }
         else{
-            echo "Il y a un problème";
+            show_404();
         }
 
     }

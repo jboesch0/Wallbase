@@ -14,14 +14,7 @@ class HomeController extends CI_Controller
 
         $this->load->model('HomeModel');
         $data['wallpapers']=$this->HomeModel->lastWallpapers();
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
         $data['tags']=$this->HomeModel->someTags();
-
->>>>>>> origin/master
         $this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
         if ($data['logged']) {
@@ -104,8 +97,6 @@ class HomeController extends CI_Controller
             echo "Il y a un problème";
         }
     }
-
-    
 
 
 }

@@ -1223,7 +1223,7 @@ a:focus {
     outline-offset: -2px;
 }
 figure {
-    margin: 0;
+    margin: 5px;
 }
 img {
     vertical-align: middle;
@@ -6918,12 +6918,8 @@ button.close {
 #recherche form{
     display: inline;
 }
-.tags{
-    position: absolute;
-    width: 14%;
-    float: left;
-    top: 9%;
-}
+
+
 figure{
     display: inline-block;
     width: 200px;

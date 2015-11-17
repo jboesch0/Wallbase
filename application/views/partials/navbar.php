@@ -8,12 +8,23 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="<?php echo base_url(); ?>">Wallbase</a>
+
+            <?php
+              if ($logged) {
+            ?>
+
             <div id="recherche" class="navbar-brand">
                 <form method="post" action="<?php echo base_url() ?>index.php/SearchController/recherche">
                     <input type="text" placeholder="Recherche..." class="form-control" name="recherche" id="searchInput" onkeyup=""/>
                     <!--<input type="submit" value="Rechercher" class="btn btn-default" />-->
                 </form>
             </div>
+
+            <?php
+              }
+            ?>
+            
+
         </div>
         <div id="navbar" class="navbar-collapse collapse">
 
