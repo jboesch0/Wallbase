@@ -14,6 +14,7 @@ class C_img extends CI_Controller
         $this->load->model('user');
         $data['logged'] = $this->user->isLoggedIn();
         $data['pseudo'] = $this->session->userdata('pseudo');
+        $data['id_user'] = $this->session->userdata('id');
     		$id_img = $this->input->get('img_id');
     		$this->load->model('M_img');
         $data["img_infos"] = $this->M_img->getImgInfos($id_img);
@@ -162,5 +163,24 @@ class C_img extends CI_Controller
         else{
             return false;
         }
+    }
+
+
+    public function changeImgName(){
+        $name = $this->input->post("Jname");
+        $idImg = $this->input->post("JidImg");
+        $this->load->model("M_img");
+
+        $newName = $this->M_img->changeImgName($idImg, $name);
+        if($newName){
+            $newName = json_decode(json_encode($newName), true);
+            //$newName["id_user"] = $this->session->userdata("id");
+            echo json_encode($newName);
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }

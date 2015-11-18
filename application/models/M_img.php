@@ -168,4 +168,18 @@ class M_img extends CI_Model
         }
 
     }
+
+
+    public function changeImgName($idImg, $name){
+
+        $sql= "UPDATE wallpaper SET titre = '".$name."' WHERE id_wallpaper = ".$idImg."";
+
+        if($this->db->query($sql)){
+
+            return $name;
+        }
+        else{
+            return null;
+        }
+    }
 }
