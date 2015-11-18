@@ -6932,3 +6932,16 @@ figcaption{
     float: right;
     margin-left: 2%;
 }
+.noteComment tr td:nth-child(1){
+    width: 1%;
+}
+.noteComment tr td:nth-child(2){
+    width: 1%;
+}
+.noteComment tr td:nth-child(3){
+    width: 30%;
+}
+pre{
+    white-space: pre-wrap;
+    max-height: 200px;
+}

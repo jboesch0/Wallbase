@@ -48,6 +48,7 @@ class C_img extends CI_Controller
             $allComment['comments']=$this->M_img->getComments($id_wallpaper);
             //var_dump($allComment);
             $allComment = json_decode(json_encode($allComment), true);
+            $allComment["id_user"] = $this->session->userdata("id");
             echo json_encode($allComment);
             return true;
         }
@@ -84,11 +85,59 @@ class C_img extends CI_Controller
             $allComment['comments']=$this->M_img->getComments($id_wallpaper);
 
             $allComment = json_decode(json_encode($allComment), true);
+            $allComment["id_user"] = $this->session->userdata("id");
             echo json_encode($allComment);
             return true;
         }
         else{
             return false;
         }
+    }
+
+    public function addLike(){
+        $idComment = $this->input->post("JidComment");
+        $this->load->model("M_img");
+        if($this->session->userdata("id") != null){
+            $result = $this->M_img->addLike($idComment, $this->session->userdata("id"));
+        }
+        if($result["success"]){
+            
+
+            $result = json_decode(json_encode($result), true);
+            $result["id_user"] = $this->session->userdata("id");
+            $result["is_like"] = true;
+            /*var_dump($result["id_user"]);
+            exit();*/
+            echo json_encode($result);
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    public function removeLike(){
+        $idComment = $this->input->post("JidComment");
+        $this->load->model("M_img");
+        if($this->session->userdata("id") != null){
+            $result = $this->M_img->removeLike($idComment, $this->session->userdata("id"));
+        }
+
+        if($result["success"]){
+            
+
+            $result = json_decode(json_encode($result), true);
+            $result["id_user"] = $this->session->userdata("id");
+            $result["is_like"] = true;
+            /*var_dump($result);
+            exit();*/
+            echo json_encode($result);
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 }

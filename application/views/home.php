@@ -38,7 +38,7 @@
                         $('#right-nav').append(
                             $('<li>').append(
                                 $('<a>').attr('href', '<?php echo base_url() ?>index.php/UserController').append(
-                                    $('<span>').attr('id', 'deco').append(res['username'])
+                                    $('<span>').attr('id', 'deco').append(res['pseudo'])
                                 )));
                         $('#right-nav').append(
                             $('<li>').append(
@@ -47,7 +47,7 @@
                                 )));
                         var html = '<div class="alert alert-success alert-dismissable page-alert">';
                         html += '<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
-                        html += 'Bonjour ' + res['username'] + ', vous êtes maintenant connecté';
+                        html += 'Bonjour ' + res['pseudo'] + ', vous êtes maintenant connecté';
                         html += '</div>';
                         $(html).hide().prependTo('#connectedUsername').slideDown();
                         $('.page-alert .close').click(function (e) {

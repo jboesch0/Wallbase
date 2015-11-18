@@ -11,10 +11,14 @@
                 success: function (res) {
                     //console.log(res["comments"]);
                     $("#commentBox").html("");
-                    
+                    id_user = res.id_user;
+                    var liens = "";
                     $.each(res.comments, function(i, val){
                         //alert(val.pseudo);
-                        $("#commentBox").append("<pre id='"+val.id_comment+"'><a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier</a><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span>"+val.comment+"</span></pre>");
+                        if(id_user==val.id_user){
+                    liens = "<a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier</a>";
+                }
+                        $("#commentBox").append("<pre id='"+val.id_comment+"'><table class='noteComment'><tr><td><a href='javascript:void(0)' onclick='addLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-up'></span><br /></a><a href='javascript:void(0)' style='color:red' onclick='removeLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-down'></span></a></td><td>"+val.likes+"</td><td>"+ liens+"<b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span class='spanComment'>"+val.comment+"</span></td></tr></table></pre>");
                     });
                     //$("#comment").val("");
                     
@@ -39,7 +43,7 @@
                         $('#right-nav').append(
                             $('<li>').append(
                                 $('<a>').attr('href', '<?php echo base_url() ?>index.php/UserController').append(
-                                    $('<span>').attr('id', 'deco').append(res['username'])
+                                    $('<span>').attr('id', 'deco').append(res['pseudo'])
                                 )));
                         $('#right-nav').append(
                             $('<li>').append(
@@ -48,8 +52,9 @@
                                 )));
                         var html = '<div class="alert alert-success alert-dismissable page-alert">';
                         html += '<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
-                        html += 'Bonjour ' + res['username'] + ', vous êtes maintenant connecté';
+                        html += 'Bonjour ' + res['pseudo'] + ', vous êtes maintenant connecté';
                         html += '</div>';
+                        document.location.reload(true);
                         $(html).hide().prependTo('#connectedUsername').slideDown();
                         $('.page-alert .close').click(function (e) {
                             e.preventDefault();
@@ -63,7 +68,7 @@
 
 function inputModif(idComment){
 
-    $("#"+idComment+" span").html('<textarea class="form-control text-area-comment" rows="3" id="comment" placeholder="Laisser un commentaire..."></textarea><input type="button" class="btn btn-default" value="valider" onclick="modifComment('+idComment+')"/>');
+    $("#"+idComment+" .spanComment").html('<textarea class="form-control text-area-comment" rows="3" id="comment" placeholder="Laisser un commentaire..."></textarea><input type="button" class="btn btn-default" value="valider" onclick="modifComment('+idComment+')"/>');
 }
 
 function modifComment(idComment){
@@ -77,10 +82,14 @@ function modifComment(idComment){
         success: function (res) {
 
             $("#commentBox").html("");
-                    
+            id_user = res.id_user;
+            var liens= "";
             $.each(res.comments, function(i, val){
+                if(id_user==val.id_user){
+                    liens = "<a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier</a>"
+                }
                 //alert(val.pseudo);
-                $("#commentBox").append("<pre id='"+val.id_comment+"'><a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier</a><b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span>"+val.comment+"</span></pre>");
+                $("#commentBox").append("<pre id='"+val.id_comment+"'><table class='noteComment'><tr><td><a href='javascript:void(0)' onclick='addLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-up'></span><br /></a><a href='javascript:void(0)' style='color:red' onclick='removeLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-down'></span></a></td><td>"+val.likes+"</td><td>"+liens+"<b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span class='spanComment'>"+val.comment+"</span></td></tr></table></pre>");
             });
            
         }
@@ -104,6 +113,34 @@ function deleteComment(idComment){
     });
 
 }
+
+function addLike(idComment){
+    $.ajax({
+        type: "POST",
+        url: "<?php base_url(); ?>" + "C_img/addLike",
+        dataType: "json",
+        data: {JidComment: idComment},
+        success: function (res) {
+            //alert(idComment);
+            $("#"+idComment+" table tr td:nth-child(2)").html(res[0]["likes"]);
+           
+        }
+    });
+}
+
+function removeLike(idComment){
+    $.ajax({
+        type: "POST",
+        url: "<?php base_url(); ?>" + "C_img/removeLike",
+        dataType: "json",
+        data: {JidComment: idComment},
+        success: function (res) {
+            //alert(idComment);
+            $("#"+idComment+" table tr td:nth-child(2)").html(res[0]["likes"]);
+           
+        }
+    });
+}
 </script>
 <div class="container">
     <div class="row">
@@ -117,8 +154,10 @@ function deleteComment(idComment){
             <div id="commentBox">
                 <?php
                 for($i=0; $i < sizeof($comments); $i++){
+                    //echo $this->session->userdata("id");
                     ?>
-                    <pre id="<?php echo $comments[$i]->id_comment;?>"><a href="javascript:void(0)" class="modifSupprComment" onclick="deleteComment(<?php echo $comments[$i]->id_comment;?>)">supprimer</a><a href="javascript:void(0)" class="modifSupprComment" onclick="inputModif(<?php echo $comments[$i]->id_comment;?>)">modifier</a><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><span><?php echo $comments[$i]->comment;?></span></pre><?php
+
+                    <pre id="<?php echo $comments[$i]->id_comment;?>"><table class="noteComment"><tr><td><a href="javascript:void(0)" onclick="addLike(<?php echo $comments[$i]->id_comment;?>)"><span class="glyphicon glyphicon-thumbs-up"></span></a><br /><a href="javascript:void(0)" style="color:red" onclick="removeLike(<?php echo $comments[$i]->id_comment;?>)"><span class="glyphicon glyphicon-thumbs-down"></span></a></td><td><?php echo $comments[$i]->likes;?></td><td><?php if($this->session->userdata("id")==$comments[$i]->id_user){?><a href="javascript:void(0)" class="modifSupprComment" onclick="deleteComment(<?php echo $comments[$i]->id_comment;?>)">supprimer</a><a href="javascript:void(0)" class="modifSupprComment" onclick="inputModif(<?php echo $comments[$i]->id_comment;?>)">modifier</a><?php }?><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><span class='spanComment'><?php echo $comments[$i]->comment;?></span></td></tr></table></pre><?php
                 }
                 ?>
             </div>

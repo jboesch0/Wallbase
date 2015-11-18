@@ -24,10 +24,11 @@ class M_img extends CI_Model
     public function postComment($comment, $id_wallpaper){
         //var_dump($comment);
         $id_user = $this->session->userdata("id");
-
         $sql= "INSERT INTO comment (comment, date_post, id_user, id_wallpaper) VALUES('".$comment."','".date('Y-m-j h:i:s')."', ".$id_user.",".$id_wallpaper.");";
 
         $res = $this->db->query($sql);
+        
+        
         //var_dump($res);
         if($res){
             return true;
@@ -80,5 +81,76 @@ class M_img extends CI_Model
         else{
             return false;
         }
+    }
+
+    public function addLike($idComment, $idusers){
+
+        $sql = "SELECT is_like FROM is_like WHERE id_comment = ".$idComment." AND id_user=".$idusers."";
+        $res = $this->db->query($sql);
+        $res = $res->result();
+        /*var_dump($res);
+        exit();*/
+        if(empty($res)){
+            $sql="UPDATE comment SET likes= likes+1 WHERE id_comment =".$idComment."";
+            $this->db->query($sql);
+        
+
+            $sql2="INSERT IGNORE INTO is_like (id_user, id_comment, is_like) VALUES('".$idusers."','".$idComment."','true')";
+            $this->db->query($sql2);
+        
+            $sql = "SELECT likes FROM comment WHERE id_comment = ".$idComment."";
+            $res = $this->db->query($sql);
+            $res = $res->result();
+
+            $res["success"]= true;
+            /*var_dump($res);
+            exit();*/
+            return $res;
+        
+        }
+        else{
+            $res["success"]= false;
+            return $res;
+        }
+
+    }
+
+    public function removeLike($idComment, $idusers){
+
+        
+        /*$sql="UPDATE comment AS c 
+        INNER JOIN is_like AS i 
+        ON c.id_comment = i.id_comment 
+        SET c.likes = c.likes-1 
+        WHERE i.id_comment = ".$idComment." 
+        AND i.id_user =".$idusers." 
+        AND i.is_like = 0";*/
+        $sql = "SELECT is_like FROM is_like WHERE id_comment = ".$idComment." AND id_user=".$idusers."";
+        $res = $this->db->query($sql);
+        $res = $res->result();
+        
+        if(empty($res)){
+            $sql="UPDATE comment SET likes= likes-1 WHERE id_comment =".$idComment."";
+            $this->db->query($sql);
+        
+
+            $sql2="INSERT IGNORE INTO is_like (id_user, id_comment, is_like) VALUES('".$idusers."','".$idComment."','true')";
+            $this->db->query($sql2);
+        
+            $sql = "SELECT likes FROM comment WHERE id_comment = ".$idComment."";
+            $res = $this->db->query($sql);
+            $res = $res->result();
+
+            $res["success"]= true;
+            /*var_dump($res);
+            exit();*/
+            return $res;
+        
+        }
+        else{
+            $res["success"]= false;
+            return $res;
+        }
+
     }
 }
