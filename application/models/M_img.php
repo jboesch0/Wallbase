@@ -39,12 +39,27 @@ class M_img extends CI_Model
 
     }
 
-    public function getComments($id_img){
+    public function getComments($id_img, $trie = null){
+        //var_dump($trie);
 
-        $sql = "SELECT * from comment c
-        INNER JOIN users u ON u.idusers = c.id_user
-        WHERE c.id_wallpaper = ".$id_img."
-        ORDER BY c.date_post";
+        if($trie == null || $trie == "date_desc"){
+            $sql = "SELECT * from comment c
+            INNER JOIN users u ON u.idusers = c.id_user
+            WHERE c.id_wallpaper = ".$id_img."
+            ORDER BY c.date_post";
+        }
+        else if($trie == "date_asc"){
+            $sql = "SELECT * from comment c
+            INNER JOIN users u ON u.idusers = c.id_user
+            WHERE c.id_wallpaper = ".$id_img."
+            ORDER BY c.date_post DESC";
+        }
+        else{
+            $sql = "SELECT * from comment c
+            INNER JOIN users u ON u.idusers = c.id_user
+            WHERE c.id_wallpaper = ".$id_img."
+            ORDER BY c.likes DESC";
+        }
         $res = $this->db->query($sql);
         /*var_dump($res->result());
         exit();*/
@@ -128,7 +143,7 @@ class M_img extends CI_Model
         $sql = "SELECT is_like FROM is_like WHERE id_comment = ".$idComment." AND id_user=".$idusers."";
         $res = $this->db->query($sql);
         $res = $res->result();
-        
+
         if(empty($res)){
             $sql="UPDATE comment SET likes= likes-1 WHERE id_comment =".$idComment."";
             $this->db->query($sql);

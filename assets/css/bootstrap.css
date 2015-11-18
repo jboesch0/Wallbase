@@ -6945,3 +6945,7 @@ pre{
     white-space: pre-wrap;
     max-height: 200px;
 }
+.order-select{
+    width: 25%;
+    margin-bottom: 2%;
+}

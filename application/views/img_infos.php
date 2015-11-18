@@ -21,7 +21,7 @@
                         $("#commentBox").append("<pre id='"+val.id_comment+"'><table class='noteComment'><tr><td><a href='javascript:void(0)' onclick='addLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-up'></span><br /></a><a href='javascript:void(0)' style='color:red' onclick='removeLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-down'></span></a></td><td>"+val.likes+"</td><td>"+ liens+"<b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span class='spanComment'>"+val.comment+"</span></td></tr></table></pre>");
                     });
                     //$("#comment").val("");
-                    
+                    $("#comment").val("");
 
                 }
             });
@@ -67,8 +67,9 @@
     });
 
 function inputModif(idComment){
-
-    $("#"+idComment+" .spanComment").html('<textarea class="form-control text-area-comment" rows="3" id="comment" placeholder="Laisser un commentaire..."></textarea><input type="button" class="btn btn-default" value="valider" onclick="modifComment('+idComment+')"/>');
+    comment = $("#"+idComment+" .spanComment").html();
+    //alert(comment);
+    $("#"+idComment+" .spanComment").html('<textarea class="form-control text-area-comment" rows="3" id="comment" placeholder="Laisser un commentaire...">'+comment+'</textarea><input type="button" class="btn btn-default" value="valider" onclick="modifComment('+idComment+')"/>');
 }
 
 function modifComment(idComment){
@@ -141,6 +142,30 @@ function removeLike(idComment){
         }
     });
 }
+
+function trierCommentaires(select){
+    img_id=<?php echo $_GET["img_id"];?>;
+    $.ajax({
+        type: "POST",
+        url: "<?php base_url(); ?>" + "C_img/trierCommentaires",
+        dataType: "json",
+        data: {Jselect: select, Jid_wallpaper: img_id},
+        success: function (res) {
+
+            $("#commentBox").html("");
+            id_user = res.id_user;
+            var liens= "";
+            $.each(res.comments, function(i, val){
+                if(id_user==val.id_user){
+                    liens = "<a href='javascript:void(0)'' class='modifSupprComment' onclick='deleteComment("+val.id_comment+")'>supprimer</a><a href='javascript:void(0)'' class='modifSupprComment' onclick='inputModif("+val.id_comment+")'>modifier</a>"
+                }
+                //alert(val.pseudo);
+                $("#commentBox").append("<pre id='"+val.id_comment+"'><table class='noteComment'><tr><td><a href='javascript:void(0)' onclick='addLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-up'></span><br /></a><a href='javascript:void(0)' style='color:red' onclick='removeLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-down'></span></a></td><td>"+val.likes+"</td><td>"+liens+"<b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span class='spanComment'>"+val.comment+"</span></td></tr></table></pre>");
+            });
+           
+        }
+    });
+}
 </script>
 <div class="container">
     <div class="row">
@@ -151,7 +176,13 @@ function removeLike(idComment){
 
                 <img src="<?php echo base_url();?>assets/wallpaper/<?php echo $img_infos[0]->titre.'.'.$img_infos[0]->extension;?>" width="500px" heigth="500px" alt="" style="margin-bottom:2%;">
             </div>
+            <select name="order_comment" class="form-control order-select" onchange="trierCommentaires(this.value)">
+                    <option value="likes">Top des commentaires</option>
+                    <option value="date_desc" selected>Les plus vieux d'abords</option>
+                    <option value="date_asc">Les plus récents d'abords</option>
+                </select>
             <div id="commentBox">
+                
                 <?php
                 for($i=0; $i < sizeof($comments); $i++){
                     //echo $this->session->userdata("id");
@@ -176,13 +207,13 @@ function removeLike(idComment){
         <?php
         if($logged){
             ?>
-            <input type="button" class="btn btn-default" id="submitComment" onclick="submitComment(<?php echo $this->input->get("img_id");?>)" value="Poster"/>
+            <input type="button" class="btn btn-default" id="submitComment" style="margin-top:2%" onclick="submitComment(<?php echo $this->input->get("img_id");?>)" value="Poster"/>
             <?php
         }
         else{
             ?>
 
-            <a data-target="#connexion" data-toggle="modal" href="" class="btn btn-default">Se connecter pour commenter</a>
+            <a data-target="#connexion" data-toggle="modal" style="margin-top:2%" href="" class="btn btn-default">Se connecter pour commenter</a>
             <?php
         }
         ?>
