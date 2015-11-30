@@ -4,3 +4,8 @@
 *.xml
 
 application/config/config.php
+*.jpg
+application/config/config.php
+application/config/config.php
+application/config/autoload.php
+application/config/database.php

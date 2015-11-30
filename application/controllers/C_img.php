@@ -171,11 +171,17 @@ class C_img extends CI_Controller
         $idImg = $this->input->post("JidImg");
         $this->load->model("M_img");
 
-        $newName = $this->M_img->changeImgName($idImg, $name);
-        if($newName){
-            $newName = json_decode(json_encode($newName), true);
+        $oldName = $this->M_img->changeImgName($idImg, $name);
+        if($oldName){
+
+            $ext = $this->M_img->getExt($idImg);
+            
+            rename("www/wallbase/assets/wallpaper/".$oldName.".".$ext[0]->extension, base_url()."assets/wallpaper/".$name.".".$ext[0]->extension);
+            rename("www/wallbase/assets/wallpaper/miniatures/".$oldName.".".$ext[0]->extension, base_url()."assets/wallpaper/miniatures/".$name.".".$ext[0]->extension);
+            $oldName = json_decode(json_encode($oldName), true);
             //$newName["id_user"] = $this->session->userdata("id");
-            echo json_encode($newName);
+
+            echo json_encode($oldName);
             return true;
         }
         else{

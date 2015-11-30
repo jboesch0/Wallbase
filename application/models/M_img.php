@@ -172,14 +172,26 @@ class M_img extends CI_Model
 
     public function changeImgName($idImg, $name){
 
+        $sql= "SELECT titre, extension FROM wallpaper WHERE id_wallpaper = ".$idImg."";
+        $res = $this->db->query($sql);
+
         $sql= "UPDATE wallpaper SET titre = '".$name."' WHERE id_wallpaper = ".$idImg."";
 
         if($this->db->query($sql)){
 
-            return $name;
+            return $res->result();;
         }
         else{
             return null;
         }
+    }
+
+    public function getExt($idImg){
+
+        $sql ="SELECT extension FROM wallpaper WHERE id_wallpaper =".$idImg."";
+
+        $res = $this->db->query($sql);
+
+        return $res->result();
     }
 }

@@ -58,6 +58,37 @@
                 }
             });
         });
+
+    $('#btn-inscription').click(function(){
+        $('#inscription').modal('hide');
+
+        var email = $('#email').val();
+        var nom = $('#nom').val();
+        var prenom = $('#prenom').val();
+        var mdp = $('#mdp').val();
+        var pseudo = $('#pseudo').val();
+        $.ajax({
+            type: "POST",
+            url: "<?php base_url(); ?>" + "index.php/HomeController/register",
+            dataType: "json",
+            data: {Jemail: email, Jnom: nom, Jprenom: prenom, Jmdp: mdp, Jpseudo:pseudo},
+            success: function (res) {
+                if (res) {
+                    $('#navInscription').hide();
+                    var html = '<div class="alert alert-success alert-dismissable page-alert">';
+                    html += '<button type="button" class="close"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>';
+                    html += 'Félicitation ' + res['pseudo'] + ', Inscription réussie !';
+                    html += '</div>';
+                    $(html).hide().prependTo('#connectedUsername').slideDown();
+                    $('.page-alert .close').click(function (e) {
+                        e.preventDefault();
+                        $(this).closest('.page-alert').slideUp();
+                    });
+
+                }
+            }
+        });
+    });
     });
 function keyWord(word){
     $.ajax({
