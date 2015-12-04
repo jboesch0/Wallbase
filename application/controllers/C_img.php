@@ -166,7 +166,7 @@ class C_img extends CI_Controller
     }
 
 
-    public function changeImgName(){
+    /*public function changeImgName(){
         $name = $this->input->post("Jname");
         $idImg = $this->input->post("JidImg");
         $this->load->model("M_img");
@@ -188,5 +188,5 @@ class C_img extends CI_Controller
             return false;
         }
 
-    }
+    }*/
 }

@@ -166,7 +166,7 @@ function trierCommentaires(select){
         }
     });
 }
-function changeImgName(idImg){
+/*function changeImgName(idImg){
     name = $("h2").html();
     //alert(comment);
     $(".titre").html('<textarea class="form-control" rows="1" style="width:150px" id="comment" placeholder="Laisser un commentaire...">'+name+'</textarea><input type="button" class="btn btn-default" value="valider" onclick="changeName('+idImg+')"/>');
@@ -187,13 +187,13 @@ function changeName(idImg){
            
         }
     });
-}
+}*/
 </script>
 <div class="container">
     <div class="row">
         <div id="connectedUsername"></div>
         <div class="jumbotron col-md-10">
-            <span class="titre"><h2 style="display:inline"><?php echo $img_infos[0]->titre;?></h2></span><?php if($img_infos[0]->idusers == $id_user){?><a href="javascript:void(0)" style="margin-left:2%" onclick="changeImgName(<?php echo $img_infos[0]->id_wallpaper;?>)">modifier</a><?php } ?>
+            <span class="titre"><h2 style="display:inline"><?php echo $img_infos[0]->titre;?></h2></span><!--<?php //if($img_infos[0]->idusers == $id_user){?><a href="javascript:void(0)" style="margin-left:2%" onclick="changeImgName(<?php //echo $img_infos[0]->id_wallpaper;?>)">modifier</a><?php //} ?>-->
             <div style="text-align: center;">
 
                 <img src="<?php echo base_url();?>assets/wallpaper/<?php echo $img_infos[0]->titre.'.'.$img_infos[0]->extension;?>" width="500px" heigth="500px" alt="" style="margin-bottom:2%;">

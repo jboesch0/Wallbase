@@ -102,4 +102,35 @@ class SearchController extends CI_Controller
 
     }
 
+    function allTags(){
+
+        $this->load->model('SearchModel');
+
+        $res = $this->SearchModel->allTags();
+
+        if($res){
+
+            $data["tags"] = $res;
+
+            $this->load->model('user');
+            $data['logged'] = $this->user->isLoggedIn();
+            if ($data['logged']) {
+              $id = $this->session->userdata('id');
+              $infosUser = $this->user->getInfos($id);
+              $data['pseudo'] = $infosUser->pseudo;
+            }
+            $this->load->view('partials/header');
+            $this->load->view('partials/navbar', $data);
+            $this->load->view('modals/connexion_modal');
+            $this->load->view('modals/inscription_modal');
+            //$this->load->view('partials/tagbar', $data);
+            $this->load->view('tags', $data);
+            $this->load->view('partials/footer');
+        }
+        else{
+            show_404();
+        }
+
+    }
+
 }
