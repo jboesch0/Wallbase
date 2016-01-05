@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div id="connectedUsername"></div>
+        <div id="connectedUsername" class="col-md-10"></div>
         <div class="jumbotron col-md-10">
             <h1>Bienvenue sur Wallbase</h1>
             <p>
@@ -35,6 +35,7 @@
                 success: function (res) {
                     if (res) {
                         $('#navConnexion').hide();
+                        $('#navInscription').hide();
                         $('#right-nav').append(
                             $('<li>').append(
                                 $('<a>').attr('href', '<?php echo base_url() ?>index.php/UserController').append(

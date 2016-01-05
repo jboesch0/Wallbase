@@ -62,4 +62,27 @@ class User extends CI_Model
       return $res->result();
     }
 
+    public function follow($idUser, $idFollow){
+      $data = array(
+          'id_user' => $idUser,
+          'id_follow' => $idFollow,
+      );
+      return $this->db->insert('follow', $data);
+    }
+
+    public function isFollowed($idCurrent, $idUser){
+      $res = $this->db->query("SELECT * FROM follow WHERE id_user = '$idCurrent' and id_follow = '$idUser'");
+      if ($res->result()) {
+        return true;
+      } else{
+        return false;
+      }
+    }
+
+    public function countFollowers($id){
+      $res = $this->db->query("SELECT * FROM follow WHERE id_follow = '$id'");
+      return $res->num_rows();
+
+    }
+
 }

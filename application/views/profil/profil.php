@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="profile-usertitle">
-                    <div class="profile-usertitle-name">
+                    <div id="affichePseudo" class="profile-usertitle-name">
                         <?php
                          echo $infos->pseudo;
                         ?>
@@ -143,8 +143,9 @@
                 dataType: "json",
                 data: {Jpseudo: pseudo, Jemail: email, Jnom: nom, Jprenom: prenom, Jmdp: mdp, Javatar: avatar},
                 success: function (res) {
-                    if (res) {
-                        alert("Success");
+                    if(res){
+                        var r = eval(res);
+                        $('#affichePseudo').html(r.pseudo);
                     }
                 }
             });

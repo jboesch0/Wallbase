@@ -11,8 +11,7 @@ class M_img extends CI_Model
 
     public function getImgInfos($img_id){
 
-        $sql = "SELECT * from wallpaper WHERE id_wallpaper =".htmlentities($img_id)."";
-
+        $sql = "SELECT * from wallpaper w, users u WHERE id_wallpaper =".htmlentities($img_id)." and w.idusers = u.idusers";
 
         $res = $this->db->query($sql);
         //var_dump($res);
@@ -27,8 +26,8 @@ class M_img extends CI_Model
         $sql= "INSERT INTO comment (comment, date_post, id_user, id_wallpaper) VALUES('".$comment."','".date('Y-m-j h:i:s')."', ".$id_user.",".$id_wallpaper.");";
 
         $res = $this->db->query($sql);
-        
-        
+
+
         //var_dump($res);
         if($res){
             return true;
@@ -108,11 +107,11 @@ class M_img extends CI_Model
         if(empty($res)){
             $sql="UPDATE comment SET likes= likes+1 WHERE id_comment =".$idComment."";
             $this->db->query($sql);
-        
+
 
             $sql2="INSERT IGNORE INTO is_like (id_user, id_comment, is_like) VALUES('".$idusers."','".$idComment."','true')";
             $this->db->query($sql2);
-        
+
             $sql = "SELECT likes FROM comment WHERE id_comment = ".$idComment."";
             $res = $this->db->query($sql);
             $res = $res->result();
@@ -121,7 +120,7 @@ class M_img extends CI_Model
             /*var_dump($res);
             exit();*/
             return $res;
-        
+
         }
         else{
             $res["success"]= false;
@@ -132,13 +131,13 @@ class M_img extends CI_Model
 
     public function removeLike($idComment, $idusers){
 
-        
-        /*$sql="UPDATE comment AS c 
-        INNER JOIN is_like AS i 
-        ON c.id_comment = i.id_comment 
-        SET c.likes = c.likes-1 
-        WHERE i.id_comment = ".$idComment." 
-        AND i.id_user =".$idusers." 
+
+        /*$sql="UPDATE comment AS c
+        INNER JOIN is_like AS i
+        ON c.id_comment = i.id_comment
+        SET c.likes = c.likes-1
+        WHERE i.id_comment = ".$idComment."
+        AND i.id_user =".$idusers."
         AND i.is_like = 0";*/
         $sql = "SELECT is_like FROM is_like WHERE id_comment = ".$idComment." AND id_user=".$idusers."";
         $res = $this->db->query($sql);
@@ -147,11 +146,11 @@ class M_img extends CI_Model
         if(empty($res)){
             $sql="UPDATE comment SET likes= likes-1 WHERE id_comment =".$idComment."";
             $this->db->query($sql);
-        
+
 
             $sql2="INSERT IGNORE INTO is_like (id_user, id_comment, is_like) VALUES('".$idusers."','".$idComment."','true')";
             $this->db->query($sql2);
-        
+
             $sql = "SELECT likes FROM comment WHERE id_comment = ".$idComment."";
             $res = $this->db->query($sql);
             $res = $res->result();
@@ -160,7 +159,7 @@ class M_img extends CI_Model
             /*var_dump($res);
             exit();*/
             return $res;
-        
+
         }
         else{
             $res["success"]= false;

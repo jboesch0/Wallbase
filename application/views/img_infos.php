@@ -92,7 +92,7 @@ function modifComment(idComment){
                 //alert(val.pseudo);
                 $("#commentBox").append("<pre id='"+val.id_comment+"'><table class='noteComment'><tr><td><a href='javascript:void(0)' onclick='addLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-up'></span><br /></a><a href='javascript:void(0)' style='color:red' onclick='removeLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-down'></span></a></td><td>"+val.likes+"</td><td>"+liens+"<b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span class='spanComment'>"+val.comment+"</span></td></tr></table></pre>");
             });
-           
+
         }
     });
 
@@ -109,7 +109,7 @@ function deleteComment(idComment){
         success: function (res) {
             //alert(idComment);
             $("#"+idComment).remove();
-           
+
         }
     });
 
@@ -124,7 +124,7 @@ function addLike(idComment){
         success: function (res) {
             //alert(idComment);
             $("#"+idComment+" table tr td:nth-child(2)").html(res[0]["likes"]);
-           
+
         }
     });
 }
@@ -138,7 +138,7 @@ function removeLike(idComment){
         success: function (res) {
             //alert(idComment);
             $("#"+idComment+" table tr td:nth-child(2)").html(res[0]["likes"]);
-           
+
         }
     });
 }
@@ -162,7 +162,7 @@ function trierCommentaires(select){
                 //alert(val.pseudo);
                 $("#commentBox").append("<pre id='"+val.id_comment+"'><table class='noteComment'><tr><td><a href='javascript:void(0)' onclick='addLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-up'></span><br /></a><a href='javascript:void(0)' style='color:red' onclick='removeLike("+val.id_comment+")'><span class='glyphicon glyphicon-thumbs-down'></span></a></td><td>"+val.likes+"</td><td>"+liens+"<b>"+(val.pseudo).toUpperCase()+"</b> le "+val.date_post+"<br /><br /><span class='spanComment'>"+val.comment+"</span></td></tr></table></pre>");
             });
-           
+
         }
     });
 }
@@ -184,7 +184,7 @@ function changeName(idImg){
         success: function (res) {
             //alert(idComment);
             $(".titre").html("<h2 style='display:inline'>"+res+"</h2>");
-           
+
         }
     });
 }*/
@@ -193,7 +193,15 @@ function changeName(idImg){
     <div class="row">
         <div id="connectedUsername"></div>
         <div class="jumbotron col-md-10">
+<<<<<<< Updated upstream
             <span class="titre"><h2 style="display:inline"><?php echo $img_infos[0]->titre;?></h2></span><!--<?php //if($img_infos[0]->idusers == $id_user){?><a href="javascript:void(0)" style="margin-left:2%" onclick="changeImgName(<?php //echo $img_infos[0]->id_wallpaper;?>)">modifier</a><?php //} ?>-->
+=======
+          <span class="text-center">
+              //test si user courant
+            <a href="<?php echo base_url(); ?>index.php/HomeController/userProfil?id=<?php echo $img_infos[0]->idusers; ?>"><?php echo $img_infos[0]->pseudo;?></a>
+          </span><br>
+            <span class="titre"><h2 style="display:inline"><?php echo $img_infos[0]->titre;?></h2></span><?php if($img_infos[0]->idusers == $id_user){?><a href="javascript:void(0)" style="margin-left:2%" onclick="changeImgName(<?php echo $img_infos[0]->id_wallpaper;?>)">modifier</a><?php } ?>
+>>>>>>> Stashed changes
             <div style="text-align: center;">
 
                 <img src="<?php echo base_url();?>assets/wallpaper/<?php echo $img_infos[0]->titre.'.'.$img_infos[0]->extension;?>" width="500px" heigth="500px" alt="" style="margin-bottom:2%;">
@@ -204,20 +212,16 @@ function changeName(idImg){
                     <option value="date_asc">Les plus récents d'abords</option>
                 </select>
             <div id="commentBox">
-                
+
                 <?php
                 for($i=0; $i < sizeof($comments); $i++){
-                    //echo $this->session->userdata("id");
                     ?>
-
                     <pre id="<?php echo $comments[$i]->id_comment;?>"><table class="noteComment"><tr><td><a href="javascript:void(0)" onclick="addLike(<?php echo $comments[$i]->id_comment;?>)"><span class="glyphicon glyphicon-thumbs-up"></span></a><br /><a href="javascript:void(0)" style="color:red" onclick="removeLike(<?php echo $comments[$i]->id_comment;?>)"><span class="glyphicon glyphicon-thumbs-down"></span></a></td><td><?php echo $comments[$i]->likes;?></td><td><?php if($this->session->userdata("id")==$comments[$i]->id_user){?><a href="javascript:void(0)" class="modifSupprComment" onclick="deleteComment(<?php echo $comments[$i]->id_comment;?>)">supprimer</a><a href="javascript:void(0)" class="modifSupprComment" onclick="inputModif(<?php echo $comments[$i]->id_comment;?>)">modifier</a><?php }?><b><?php echo strtoupper($comments[$i]->pseudo);?></b> le <?php echo $comments[$i]->date_post;?><br /><br /><span class='spanComment'><?php echo $comments[$i]->comment;?></span></td></tr></table></pre><?php
                 }
                 ?>
             </div>
         </div>
     </div>
-
-
 </div>
 <div class="container">
     <div id="connectedUsername"></div>

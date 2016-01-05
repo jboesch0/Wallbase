@@ -33,6 +33,29 @@ class HomeController extends CI_Controller
 
     }
 
+    public function userProfil(){
+      $data['logged'] = $this->user->isLoggedIn();
+      if ($data['logged']) {
+        $id = $this->session->userdata('id');
+        $idUser = $this->input->get('id');
+        $data['follow'] = $this->user->isFollowed($id, $idUser);
+        $data['countFollowers'] = $this->user->countFollowers($idUser);
+        $data['idExtern'] = $idUser;
+        $data['infos'] = $this->user->getInfos($idUser);
+        $data['currentUser'] = $this->user->getInfos($id);
+        $data['pseudo'] = $data['currentUser']->pseudo;
+        $data['avatar'] = $this->user->getAvatar($idUser)->avatar;
+        $data['UserImgs'] = $this->user->getImgsByUser($idUser);
+        $data['currentId'] = $this->session->userdata("id");
+        $this->load->view('partials/header', $data);
+        $this->load->view('partials/navbar');
+        $this->load->view('profil/userprofil', $data);
+        $this->load->view('partials/footer');
+    }
+  }
+
+
+
     public function register(){
         $email = $this->input->post('Jemail');
         $pseudo = $this->input->post('Jpseudo');

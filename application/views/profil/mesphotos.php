@@ -5,7 +5,7 @@
 
     <?php
         $num = 1;
-        $breaker = 4; //How many cols inside a row?
+        $breaker = 4;
 
         foreach($UserImgs as $i) {
             if ($num == 1){

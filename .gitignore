@@ -4,9 +4,20 @@
 *.xml
 
 application/config/config.php
+<<<<<<< Updated upstream
 *.jpg
 application/config/config.php
 application/config/config.php
 application/config/autoload.php
 application/config/database.php
 application/config/database.php
+=======
+
+assets/wallpaper/img.jpeg
+
+assets/wallpaper/miniatures/img.jpeg
+
+assets/wallpaper/miniatures/Paysage.jpg
+
+assets/wallpaper/Paysage.jpg
+>>>>>>> Stashed changes

@@ -23,7 +23,7 @@
             <?php
               }
             ?>
-            
+
 
         </div>
         <div id="navbar" class="navbar-collapse collapse">

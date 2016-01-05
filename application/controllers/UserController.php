@@ -38,6 +38,11 @@ class UserController extends CI_Controller
         $mdp = $this->input->post('Jmdp');
         $avatar = $this->input->post('Javatar');
         $this->user->update($id, $email, $pseudo, $nom, $prenom, $mdp);
+        $retour = array(
+            'success' =>  true,
+            'pseudo' => $pseudo
+        );
+        echo json_encode($retour);
     }
 
     public function setAvatar(){
@@ -66,8 +71,6 @@ class UserController extends CI_Controller
 
     public function mesPhotos(){
       $this->load->model('user');
-
-
       $data['logged'] = $this->user->isLoggedIn();
       if ($data['logged']) {
         $id = $this->session->userdata('id');
@@ -81,7 +84,41 @@ class UserController extends CI_Controller
       }else {
         redirect('HomeController');
       }
+    }
 
+    public function photosFromUser(){
+        $this->load->model('user');
+        $data['logged'] = $this->user->isLoggedIn();
+        if ($data['logged']) {
+            $id = $this->session->userdata('id');
+            $idd = $this->input->get('id');
+            $data['infos'] = $this->user->getInfos($id);
+            $data['pseudo'] = $data['infos']->pseudo;
+            $data['UserImgs'] = $this->user->getImgsByUser($idd);
+            $this->load->view('partials/header', $data);
+            $this->load->view('partials/navbar');
+            $this->load->view('profil/mesphotos', $data);
+            $this->load->view('partials/footer');
+        }else {
+            redirect('HomeController');
+        }
+    }
+
+    public function follow(){
+      $id = $this->input->post('Jid');
+      $idCurrent = $this->session->userdata('id');
+      $return = $this->user->follow($idCurrent, $id);
+
+      if($return){
+          $data = array(
+              'return' => true,
+              'followed' => true
+          );
+          echo (json_encode($data));
+          return true;
+      }else {
+          return false;
+      }
     }
 
 }
