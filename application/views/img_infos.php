@@ -172,9 +172,20 @@ function trierCommentaires(select){
     <div class="row">
         <div id="connectedUsername"></div>
         <div class="jumbotron col-md-10">
-            <span class="titre"><h2 style="display:inline"><?php echo $img_infos[0]->titre;?></h2></span><!--<?php //if($img_infos[0]->idusers == $id_user){?><a href="javascript:void(0)" style="margin-left:2%" onclick="changeImgName(<?php //echo $img_infos[0]->id_wallpaper;?>)">modifier</a><?php //} ?>-->
-          <span class="text-center">
-            <a href="<?php echo base_url(); ?>index.php/HomeController/userProfil?id=<?php echo $img_infos[0]->idusers; ?>"><?php echo $img_infos[0]->pseudo;?></a>
+            <span class="titre"><h2 style="display:inline"><?php echo $img_infos[0]->titre;?></h2></span><br>
+
+            <?php
+             if($img_infos[0]->idusers != $this->session->userdata['id'] ) {
+            ?>
+                 <a href="<?php echo base_url(); ?>index.php/HomeController/userProfil?id=<?php echo $img_infos[0]->idusers; ?>"><?php echo $img_infos[0]->pseudo;?></a>
+            <?php
+             }else {
+             ?>
+
+             <?php
+             }
+            ?>
+          <span class="text-center"><br>
           </span><br>
             <div style="text-align: center;">
 
