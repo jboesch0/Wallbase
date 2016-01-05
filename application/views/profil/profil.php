@@ -23,7 +23,6 @@
                     <ul class="nav" id="nav">
                         <li class="active"><a href="#home" data-toggle="tab"><i class="glyphicon glyphicon-user"></i>Mon profil</a></li>
                         <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-camera"></i>Mes photos</a></li>
-                        <li><a href="#contact" data-toggle="tab"><i class="glyphicon glyphicon-envelope"></i>Mes messages <span class="badge">5</span></a></li>
 
                     </ul>
                 </div>

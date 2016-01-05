@@ -180,9 +180,7 @@ function trierCommentaires(select){
                  <a href="<?php echo base_url(); ?>index.php/HomeController/userProfil?id=<?php echo $img_infos[0]->idusers; ?>"><?php echo $img_infos[0]->pseudo;?></a>
             <?php
              }else {
-             ?>
 
-             <?php
              }
             ?>
           <span class="text-center"><br>
