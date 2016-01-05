@@ -99,10 +99,7 @@ function keyWord(word){
         data: word,
         success: function(res){
             if(res){
-                /*$("#searchInput").append("div");
-                res.each(function(index){
-                    $("#searchInput div").append("<span class='options'>"+res[index]+"</span>");
-                });*/
+               
 
             }
         }
