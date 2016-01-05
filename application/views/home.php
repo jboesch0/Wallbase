@@ -99,7 +99,7 @@ function keyWord(word){
         data: word,
         success: function(res){
             if(res){
-               
+
 
             }
         }

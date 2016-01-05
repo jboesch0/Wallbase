@@ -176,7 +176,6 @@ function trierCommentaires(select){
           <span class="text-center">
             <a href="<?php echo base_url(); ?>index.php/HomeController/userProfil?id=<?php echo $img_infos[0]->idusers; ?>"><?php echo $img_infos[0]->pseudo;?></a>
           </span><br>
-            <span class="titre"><h2 style="display:inline"><?php echo $img_infos[0]->titre;?></h2></span><?php if($img_infos[0]->idusers == $id_user){?><a href="javascript:void(0)" style="margin-left:2%" onclick="changeImgName(<?php echo $img_infos[0]->id_wallpaper;?>)">modifier</a><?php } ?>
             <div style="text-align: center;">
 
                 <img src="<?php echo base_url();?>assets/wallpaper/<?php echo $img_infos[0]->titre.'.'.$img_infos[0]->extension;?>" width="500px" heigth="500px" alt="" style="margin-bottom:2%;">
