@@ -18,6 +18,7 @@ class UserController extends CI_Controller
           $data['pseudo'] = $data['infos']->pseudo;
           $data['avatar'] = $this->user->getAvatar($id)->avatar;
           $data['UserImgs'] = $this->user->getImgsByUser($id);
+          $data['follows'] = $return = $this->user->getFollow($id);
           $this->load->view('partials/header', $data);
           $this->load->view('partials/navbar');
           $this->load->view('profil/profil', $data);
@@ -120,5 +121,6 @@ class UserController extends CI_Controller
           return false;
       }
     }
+
 
 }

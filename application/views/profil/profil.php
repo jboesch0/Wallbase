@@ -23,7 +23,7 @@
                     <ul class="nav" id="nav">
                         <li class="active"><a href="#home" data-toggle="tab"><i class="glyphicon glyphicon-user"></i>Mon profil</a></li>
                         <li><a href="#about" data-toggle="tab"><i class="glyphicon glyphicon-camera"></i>Mes photos</a></li>
-                        <li><a href="#contact" data-toggle="tab"><i class="glyphicon glyphicon-envelope"></i>Mes messages <span class="badge">5</span></a></li>
+                        <li><a href="#contact" data-toggle="tab"><i class="glyphicon glyphicon-ok"></i>Abonnements</a></li>
 
                     </ul>
                 </div>
@@ -119,8 +119,17 @@
                 </div>
             </div>
             <div class="tab-pane" id="contact">
-                <h2>Mes messages</h2>
+                <h2>Mes abonnements</h2>
                 <hr>
+                <?php
+                for($i=0; $i< sizeof($follows); $i++){
+                ?>
+                    <a href="<?php echo base_url()?>/HomeController/userProfil?id=<?= $follows[$i]->idusers ?>"><?= $follows[$i]->pseudo;?></a>
+                    <img src="<? echo base_url() . 'assets/avatar/' . $follows[$i]->avatar; ?>" class="img-responsive" width="150" alt="">
+                    <br>
+                <?php
+                }
+                ?>
             </div>
         </div>
         </div>
