@@ -16,7 +16,7 @@ class SearchModel extends CI_Model
 	}
 
 	public function searchByTag($tag){
-		$sql = "SELECT titre, extension FROM wallpaper w
+		$sql = "SELECT w.id_wallpaper, titre, extension FROM wallpaper w
 		INNER JOIN a_pour a ON w.id_wallpaper = a.id_wallpaper
 		INNER JOIN tag t ON a.id_tag = t.id_tag
 		WHERE t.nom = '".$tag."'";

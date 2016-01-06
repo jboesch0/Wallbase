@@ -166,27 +166,20 @@ class C_img extends CI_Controller
     }
 
 
-    /*public function changeImgName(){
-        $name = $this->input->post("Jname");
-        $idImg = $this->input->post("JidImg");
+    /*function showTags(){
+        $val = $this->input->post("Jval");
+
         $this->load->model("M_img");
+        //$result = $this->M_img->modifComment($idComment, $comment);
+        $tags=$this->M_img->showTags($val);
+        if($tags){
 
-        $oldName = $this->M_img->changeImgName($idImg, $name);
-        if($oldName){
 
-            $ext = $this->M_img->getExt($idImg);
-            
-            rename("www/wallbase/assets/wallpaper/".$oldName.".".$ext[0]->extension, base_url()."assets/wallpaper/".$name.".".$ext[0]->extension);
-            rename("www/wallbase/assets/wallpaper/miniatures/".$oldName.".".$ext[0]->extension, base_url()."assets/wallpaper/miniatures/".$name.".".$ext[0]->extension);
-            $oldName = json_decode(json_encode($oldName), true);
-            //$newName["id_user"] = $this->session->userdata("id");
-
-            echo json_encode($oldName);
-            return true;
+            $tags = json_decode(json_encode($tags), true);
+            echo json_encode($tags);
         }
         else{
             return false;
         }
-
     }*/
 }

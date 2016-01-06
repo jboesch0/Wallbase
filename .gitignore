@@ -21,3 +21,6 @@ assets/wallpaper/miniatures/Paysage.jpg
 
 assets/wallpaper/Paysage.jpg
 >>>>>>> Stashed changes
+.idea/Wallbase.iml
+application/config/database.php
+application/config/config.php

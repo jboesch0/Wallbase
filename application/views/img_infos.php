@@ -167,6 +167,41 @@ function trierCommentaires(select){
     });
 }
 
+    function showTags(val){
+        $.ajax({
+            type: "POST",
+            url: "<?php base_url(); ?>" + "C_img/showTags",
+            dataType: "json",
+            data: {Jval: val},
+            success: function (res) {
+
+                var dataList = '';
+                for(i =0; i< res.length; i++){
+                    dataList += '<option  value="'+res[i].id_tag+' - '+res[i].nom+'">';
+                }
+                document.getElementById('assignTag').innerHTML = dataList;
+
+
+            }
+        });
+    }
+
+    function saveTag(){
+
+        value = document.getElementById('searchInput').value.split(' ')[0];
+        $.ajax({
+            type: "POST",
+            url: "<?php base_url(); ?>" + "C_img/saveTag",
+            dataType: "json",
+            data: {Jval: val},
+            success: function (res) {
+
+
+
+            }
+        });
+    }
+
 </script>
 <div class="container">
     <div class="row">
@@ -180,9 +215,6 @@ function trierCommentaires(select){
                  <a href="<?php echo base_url(); ?>index.php/HomeController/userProfil?id=<?php echo $img_infos[0]->idusers; ?>"><?php echo $img_infos[0]->pseudo;?></a>
             <?php
              }else {
-             ?>
-
-             <?php
              }
             ?>
           <span class="text-center"><br>
@@ -195,7 +227,18 @@ function trierCommentaires(select){
                     <option value="likes">Top des commentaires</option>
                     <option value="date_desc" selected>Les plus vieux d'abords</option>
                     <option value="date_asc">Les plus récents d'abords</option>
-                </select>
+            <!--<input type="text"  list="assignTag" id="inputTags" onkeyup="showTags(this.value)" list="searchByName"/><datalist id="assignTag" ></datalist>-->
+                <form class="form-control">
+                    <select name="selectTag">
+                        <?php
+
+                        $sql = "SELECT * FROM tag WHERE nom LIKE '%".$val."%'";
+                        $res = $this->db->query($sql);
+                        $res = $res->result();
+
+                        ?>
+                    </select>
+                </form>
             <div id="commentBox">
 
                 <?php

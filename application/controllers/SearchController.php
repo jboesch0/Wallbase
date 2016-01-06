@@ -38,7 +38,8 @@ class SearchController extends CI_Controller
 
             $this->load->model('HomeModel');
             $data['tags']=$this->HomeModel->someTags();
-            //var_dump($res);
+            /*var_dump($data);
+            exit;*/
             $this->load->model('user');
             $data['logged'] = $this->user->isLoggedIn();
             if ($data['logged']) {
