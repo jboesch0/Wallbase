@@ -70,6 +70,10 @@ class User extends CI_Model
       return $this->db->insert('follow', $data);
     }
 
+    public function getFollow($idUser){
+        $res = $this->db->query("SELECT * FROM follow f, users u WHERE id_user = '$idUser' AND f.id_follow = u.idusers");
+        return $res->result();
+    }
     public function isFollowed($idCurrent, $idUser){
       $res = $this->db->query("SELECT * FROM follow WHERE id_user = '$idCurrent' and id_follow = '$idUser'");
       if ($res->result()) {
